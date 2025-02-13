@@ -1,2 +1,2 @@
 # arilus-prod
-Everything related to hosting arilu.ru on drupal
+Everything related to hosting arilus.ru on drupal
