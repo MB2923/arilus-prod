@@ -6,6 +6,7 @@ services:
     container_name: drupal
     ports:
       - "8080:80"
+      - "8443:443"
     volumes:
       - ./drupal/modules:/var/www/html/modules
       - ./drupal/themes:/var/www/html/themes
