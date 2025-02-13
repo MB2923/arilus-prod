@@ -7,10 +7,12 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - drupal_modules1:/var/www/html/modules
-      - drupal_profiles1:/var/www/html/profiles
-      - drupal_themes1:/var/www/html/themes
-      - drupal_sites1:/var/www/html/sites
+      - ./drupal/modules:/var/www/html/modules
+      - ./drupal/themes:/var/www/html/themes
+      - ./drupal/profiles:/var/www/html/profiles
+      - ./drupal/sites:/var/www/html/sites
+    # - ./drupal/translations:/var/www/html/sites/default/files/translations
+    #- ./drupal/:/var/www/html
     environment:
       - DRUPAL_DATABASE_HOST=mariadb
       - DRUPAL_DATABASE_PORT=3306
@@ -20,6 +22,7 @@ services:
     depends_on:
       - mariadb
     restart: unless-stopped
+    user: "www-data:www-data"
 
   mariadb:
     image: mariadb:latest
@@ -30,12 +33,6 @@ services:
       - MYSQL_USER=drupal
       - MYSQL_PASSWORD=drupal
     volumes:
-      - mariadb_data1:/var/lib/mysql
+      - ./mariadb:/var/lib/mysql
     restart: unless-stopped
 
-volumes:
-  mariadb_data1:
-  drupal_modules1:
-  drupal_profiles1:
-  drupal_themes1:
-  drupal_sites1:
